@@ -50,16 +50,9 @@ const websiteSchema = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/png" sizes="32x32" href={withBase('favicon.png')} />
     <link rel="alternate" type="application/rss+xml" title="Krabuś, Krówka i ich wędrówka" href={withBase('rss.xml')} />
-    {import.meta.env.DEV && (
-      <>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500&family=Cardo:wght@400;700&family=Cormorant+Garamond:wght@400;500&family=Crimson+Pro:wght@400;500&family=Fraunces:opsz,wght@9..144,400;9..144,500&family=Lora:wght@400;500&family=Merriweather:wght@400;700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=Playfair+Display:wght@400;500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500&display=swap"
-          rel="stylesheet"
-        />
-      </>
-    )}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&display=swap" rel="stylesheet" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
     <title>{title}</title>
   </head>
@@ -72,75 +65,5 @@ const websiteSchema = {
       </a>
     </header>
     <main id="tresc" tabindex="-1"><slot /></main>
-    {import.meta.env.DEV && (
-      <aside class="font-tester" aria-live="polite" aria-label="Tester krojów pisma">
-        <span class="font-tester__hint">Klawisze 1–9, 0</span>
-        <strong id="font-tester-name">1 — Newsreader</strong>
-      </aside>
-    )}
-    {import.meta.env.DEV && (
-      <script is:inline>
-        const fonts = {
-          '1': ['Newsreader', '"Newsreader", Georgia, serif'],
-          '2': ['Lora', '"Lora", Georgia, serif'],
-          '3': ['Alegreya', '"Alegreya", Georgia, serif'],
-          '4': ['Crimson Pro', '"Crimson Pro", Georgia, serif'],
-          '5': ['Source Serif 4', '"Source Serif 4", Georgia, serif'],
-          '6': ['Cormorant Garamond', '"Cormorant Garamond", Georgia, serif'],
-          '7': ['Fraunces', '"Fraunces", Georgia, serif'],
-          '8': ['Cardo', '"Cardo", Georgia, serif'],
-          '9': ['Merriweather', '"Merriweather", Georgia, serif'],
-          '0': ['Playfair Display', '"Playfair Display", Georgia, serif'],
-        };
-
-        const label = document.querySelector('#font-tester-name');
-
-        const selectFont = (key) => {
-          const font = fonts[key];
-          if (!font) return;
-          document.documentElement.style.setProperty('--serif', font[1]);
-          label.textContent = `${key} — ${font[0]}`;
-        };
-
-        selectFont('1');
-        window.addEventListener('keydown', (event) => {
-          const target = event.target;
-          if (target instanceof HTMLElement && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
-          selectFont(event.key);
-        });
-      </script>
-    )}
   </body>
 </html>
-
-<style>
-  .font-tester {
-    position: fixed;
-    right: 1rem;
-    bottom: 1rem;
-    z-index: 30;
-    display: grid;
-    gap: 0.1rem;
-    min-width: 13rem;
-    padding: 0.7rem 0.9rem;
-    border: 1px solid var(--line);
-    border-radius: 0.65rem;
-    background: color-mix(in srgb, var(--paper) 92%, white);
-    box-shadow: 0 0.5rem 2rem rgba(65, 67, 62, 0.14);
-    color: var(--ink);
-    font-family: var(--sans);
-    line-height: 1.35;
-  }
-
-  .font-tester__hint {
-    color: var(--muted);
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-
-  .font-tester strong {
-    font-size: 0.92rem;
-    font-weight: 600;
-  }
-</style>
