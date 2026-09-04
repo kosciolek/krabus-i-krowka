@@ -1,0 +1,49 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const posts = (await getCollection('posts'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const renderedPosts = await Promise.all(
+  posts.map(async (post) => ({
+    post,
+    Content: (await render(post)).Content,
+  })),
+);
+
+const formatDate = (date: Date) => new Intl.DateTimeFormat('pl-PL', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+}).format(date);
+
+const blogSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Blog',
+  name: 'Krabuś, Krówka i ich wędrówka',
+  description: 'Przygody Krabusia, Krówki i spółki.',
+  url: Astro.url.href,
+  inLanguage: 'pl-PL',
+  blogPost: posts.map((post) => ({
+    '@type': 'BlogPosting',
+    headline: post.data.title,
+    datePublished: post.data.date.toISOString(),
+    url: new URL(`#${post.id}`, Astro.url).href,
+    inLanguage: 'pl-PL',
+  })),
+};
+---
+
+<BaseLayout>
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
+  <div class="container post-list">
+    {renderedPosts.map(({ post, Content }) => (
+      <article class="post" id={post.id}>
+        <h2>{post.data.title}</h2>
+        <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+        <div class="post-content"><Content /></div>
+      </article>
+    ))}
+  </div>
+</BaseLayout>

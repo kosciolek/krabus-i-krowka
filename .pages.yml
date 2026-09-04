@@ -1,0 +1,57 @@
+media:
+  - name: post_images
+    label: Zdjęcia do wpisów
+    input: public/images/posts
+    output: /images/posts
+    extensions: [jpg, jpeg, png, webp, avif]
+    categories: [image]
+    rename: safe
+
+content:
+  - name: posts
+    label: Opowieści
+    type: collection
+    path: src/content/posts
+    filename:
+      template: "{year}-{month}-{day}-{primary}.md"
+      field: create
+    view:
+      fields: [title, date]
+      primary: title
+      sort: [date, title]
+      search: [title]
+      default:
+        sort: date
+        order: desc
+    fields:
+      - name: title
+        label: Tytuł
+        type: string
+        required: true
+      - name: date
+        label: Data wyprawy
+        type: date
+        required: true
+        options:
+          format: yyyy-MM-dd
+      - name: body
+        label: Treść
+        type: rich-text
+        required: true
+        options:
+          format: markdown
+          media: post_images
+          path: public/images/posts
+          rename: safe
+          switcher: true
+
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "content: dodaj {filename}"
+      update: "content: aktualizuj {filename}"
+      delete: "content: usuń {filename}"
+      rename: "content: zmień nazwę {oldFilename} na {newFilename}"

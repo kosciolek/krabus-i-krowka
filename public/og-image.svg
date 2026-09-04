@@ -1,0 +1,17 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+      <feComponentTransfer><feFuncA type="table" tableValues="0 0.07"/></feComponentTransfer>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="#d8d5cc"/>
+  <circle cx="1080" cy="80" r="330" fill="#c7c9bf" opacity="0.55"/>
+  <circle cx="110" cy="610" r="280" fill="#c9bda8" opacity="0.45"/>
+  <rect width="1200" height="630" filter="url(#noise)" opacity="0.5"/>
+  <text x="100" y="210" fill="#41433e" font-family="Georgia, serif" font-size="82">Krabuś, Krówka</text>
+  <text x="100" y="306" fill="#41433e" font-family="Georgia, serif" font-size="82">i ich wędrówka</text>
+  <line x1="100" y1="386" x2="1100" y2="386" stroke="#41433e" stroke-opacity="0.18"/>
+  <text x="100" y="450" fill="#595d56" font-family="Arial, sans-serif" font-size="30" letter-spacing="1">Przygody Krabusia, Krówki i spółki.</text>
+</svg>
