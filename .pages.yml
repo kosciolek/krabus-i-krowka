@@ -29,7 +29,7 @@ content:
         type: string
         required: true
       - name: date
-        label: Data wyprawy
+        label: Data
         type: date
         required: true
         options:
