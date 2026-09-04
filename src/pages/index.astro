@@ -38,6 +38,21 @@ const blogSchema = {
 <BaseLayout>
   <script is:inline type="application/ld+json" set:html={JSON.stringify(blogSchema)} />
   <div class="container post-list">
+    <nav class="post-index" aria-label="Spis wpisów">
+      <ol>
+        {posts.map((post) => (
+          <li>
+            <a href={`#${post.id}`}>
+              <span class="post-index__title">
+                <span aria-hidden="true">#</span>
+                {post.data.title}
+              </span>
+              <time datetime={post.data.date.toISOString()}>{formatDate(post.data.date)}</time>
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
     {renderedPosts.map(({ post, Content }) => (
       <article class="post" id={post.id}>
         <h2>{post.data.title}</h2>
