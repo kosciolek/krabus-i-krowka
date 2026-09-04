@@ -38,7 +38,7 @@ a:focus-visible {
   outline-offset: 4px;
   border-radius: 0.15rem;
 }
-img { display: block; max-width: 100%; height: auto; border-radius: 0.65rem; }
+img { display: block; max-width: 100%; height: auto; border-radius: 0.75rem; }
 
 .skip-link {
   position: fixed;
@@ -71,7 +71,6 @@ img { display: block; max-width: 100%; height: auto; border-radius: 0.65rem; }
   width: 48px;
   height: 48px;
   flex: 0 0 auto;
-  border-radius: 0;
   image-rendering: auto;
 }
 .brand h1 {
